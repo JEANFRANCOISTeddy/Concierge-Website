@@ -1,0 +1,163 @@
+/* Colors
+white --> #FFFFFF
+blue --> #12A4E3
+red --> #CF1717
+grey --> #DDDDDD
+black --> #000000
+blue_logo --> #374b52
+*/
+
+@font-face {
+  font-family: "BreeSerif";
+  src: url('../fonts/BreeSerif-Regular.woff2') format('woff2');
+}
+
+*{
+  padding: 0px;
+  margin: 0px;
+}
+
+header{
+  background-color: #DDDDDD;
+  color: #000000;
+  text-align: center;
+  font-family: "BreeSerif", serif;
+  font-size: 28px;
+}
+
+header li{
+  list-style: none;
+  text-decoration: none;
+  display: inline-block;
+  padding: 30px;
+  margin: 60px;
+}
+
+nav a{
+  color: #374b52;
+}
+
+nav a:hover{
+  text-decoration: none;
+  color: #374b52;
+}
+
+.btn-primary{
+  background-color: #12A4E3;
+  border: none;
+}
+
+#area{
+  font-size: 22px;
+}
+
+.btn-danger{
+  background-color: #CF1717;
+  border: none;
+}
+
+.background{
+
+}
+
+.inlineButton{
+  display: flex;
+  justify-content: center;
+}
+
+.presentation{
+  background-color: #DDDDDD;
+  display: inline-block;
+  width: 100%;
+}
+
+.costumer{
+  margin: 50px;
+  display: inline-block;
+}
+
+#description{
+  font-family: "BreeSerif", serif;
+  font-size: 20px;
+  color: #000000;
+}
+
+#bio{
+  font-family: "BreeSerif", serif;
+  color: #000000;
+}
+
+#textarea{
+  padding-top: 60px;
+}
+
+#grey_box{
+}
+
+.inline{
+  display: inline-block;
+}
+
+#title{
+  font-family: "BreeSerif", serif;
+  display: inline-block;
+  margin: 50px;
+  color: #000000;
+}
+
+.text{
+  font-family: "BreeSerif", serif;
+  font-size: 25px;
+  display: inline-block;
+  padding: 5px;
+  color: #000000;
+}
+
+.icones{
+  display: inline-block;
+  padding: 65px;
+}
+
+.box{
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #DDDDDD;
+  margin: 30px;
+  border: none;
+}
+
+.bodi{
+  background-color: #DDDDDD;
+}
+
+.font{
+  font-family: "BreeSerif", serif;
+  color: #000000;
+}
+
+.card{
+  background-color: #DDDDDD;
+}
+
+footer{
+  background-color: #DDDDDD;
+  color: #000000;
+  text-align: center;
+  margin-top: auto;
+  bottom: 0;
+  width: 100%;
+}
+
+#footer{
+  background-color: #DDDDDD;
+  color: #000000;
+  text-align: center;
+  margin-top: auto;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+#bottom{
+  display: inline-block;
+}

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js webgl - glTF loader</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link type="text/css" rel="stylesheet" href="main.css">
+	</head>
+
+	<body>
+		<script type="text/javascript" src="callFunction">
+
+		</script>
+		<script type="module">
+			import * as THREE from '../build/three.module.js';
+			import Stats from './jsm/libs/stats.module.js';
+			import { OrbitControls } from './jsm/controls/OrbitControls.js';
+			import { GLTFLoader } from './jsm/loaders/GLTFLoader.js';
+
+
+			var container, stats, controls;
+			var camera, scene, renderer;
+			var pi = Math.PI;
+
+			//Vriable of office and all everythink on it
+			var woodOffice, computerScreen, keyboard, mouse, mousePad;
+
+			init();
+			animate();
+
+			function init() {
+
+				container = document.createElement( 'div' );
+				document.body.appendChild( container );
+
+				// initialisation de la cammera
+				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
+				camera.position.set( 0, 100, 0 );
+
+				// initialisation de notre scene
+				scene = new THREE.Scene();
+				scene.background = new THREE.Color( 0xa0a0a0 );
+				scene.fog = new THREE.Fog( 0xa0a0a0, 200, 1000 );
+
+				//lumiere ambient
+				var ambient = new THREE.AmbientLight( 0xffffff, 1 );
+				scene.add( ambient );
+
+
+				// loading 3d object
+				const loader = new GLTFLoader();
+
+				//load woodOffice
+				loader.load('models/furnitures/woodOffice/scene.gltf', function ( gltf ) {
+					woodOffice = gltf.scene;
+					woodOffice.scale.set(1,1,1);
+					scene.add( woodOffice );
+    		});
+
+				//load computerScreen
+				loader.load('models/computerScreen/scene.gltf', function ( gltf ) {
+					computerScreen = gltf.scene;
+					computerScreen.scale.set(8,8,8);
+					computerScreen.rotation.y = pi/2;
+					computerScreen.position.set(-12, 42,17);
+					scene.add( computerScreen );
+    		});
+
+				//load keyboard
+				loader.load('models/keyboard/scene.gltf', function ( gltf ) {
+					keyboard = gltf.scene;
+					keyboard.scale.set(1,1,1);
+					keyboard.rotation.y = pi/2;
+					keyboard.position.set(5, 42,15);
+					scene.add( keyboard );
+    		});
+
+				//load mouse
+				loader.load('models/mouse/scene.gltf', function ( gltf ) {
+					mouse = gltf.scene;
+					mouse.scale.set(0.8,0.8,0.8);
+					mouse.rotation.y = pi/2;
+					mouse.position.set(-5, 43, -20);
+					scene.add( mouse );
+    		});
+
+				//load mousepad
+				loader.load('models/mousePad/scene.gltf', function ( gltf ) {
+					mousePad = gltf.scene;
+					mousePad.scale.set(0.2,0.2,0.2);
+					mousePad.rotation.y = pi/2;
+					mousePad.position.set(0, 43, -20);
+					scene.add( mousePad );
+    		});
+
+
+
+
+
+
+
+
+
+				//reflet
+				// new RGBELoader()
+				// 	.setDataType( THREE.UnsignedByteType )
+				// 	.setPath( 'textures/equirectangular/' )
+				// 	.load( 'pedestrian_overpass_2k.hdr', function ( texture ) {
+				//
+				// 		var cubeGenerator = new EquirectangularToCubeGenerator( texture, { resolution: 1024 } );
+				// 		cubeGenerator.update( renderer );
+				//
+				// 		var pmremGenerator = new PMREMGenerator( cubeGenerator.renderTarget.texture );
+				// 		pmremGenerator.update( renderer );
+				//
+				// 		var pmremCubeUVPacker = new PMREMCubeUVPacker( pmremGenerator.cubeLods );
+				// 		pmremCubeUVPacker.update( renderer );
+				//
+				// 		var envMap = pmremCubeUVPacker.CubeUVRenderTarget.texture;
+
+						// model
+
+						// var loader = new GLTFLoader().setPath( 'models/soccer_ball/' );
+						// loader.load( 'scene.gltf', function ( gltf ) {
+						// 	ball = gltf.scene;
+						// 	ball.traverse( function ( child ) {
+						//
+						// 		if ( child.isMesh ) {
+						//
+						// 			child.material.envMap = envMap;
+						//
+						// 		}
+						//
+						// 	} );
+						// 	ball.scale.set(10,10,10);
+						//
+						// 	scene.add( ball );
+						//
+						// } );
+
+					// 	pmremGenerator.dispose();
+					// 	pmremCubeUVPacker.dispose();
+					//
+					// 	scene.background = cubeGenerator.renderTarget;
+					//
+					// } );
+
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.gammaOutput = true;
+				container.appendChild( renderer.domElement );
+
+				controls = new OrbitControls( camera, renderer.domElement );
+				controls.target.set( 0, - 0.2, - 0.2 );
+				controls.update();
+
+				window.addEventListener( 'resize', onWindowResize, false );
+
+				// stats
+				stats = new Stats();
+				container.appendChild( stats.dom );
+
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+
+			//
+
+			function animate() {
+
+				requestAnimationFrame( animate );
+
+				renderer.render( scene, camera );
+
+				stats.update();
+
+			}
+
+		</script>
+
+	</body>
+</html>
